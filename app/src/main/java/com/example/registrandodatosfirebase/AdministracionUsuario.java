@@ -24,6 +24,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class AdministracionUsuario extends AppCompatActivity {
     // Realizamos una referencia a la base de datos
@@ -79,12 +80,16 @@ public class AdministracionUsuario extends AppCompatActivity {
     }
     //:::::::::::::::::::::::::: Metodo para subir la informacion a la BD :::::::::::::::::::::::::
     private void SubiendoDatos(String Articulo, String Descripcion, String Precio, String Foto) {
+        //Creando ID randon
+        Random rand = new Random();
+        int n = rand.nextInt(1000000000); // Gives n such that 0 <= n < 1,000,000,000
         //Para cargar estos valores
         Map<String, Object> datosUsuario   =   new HashMap<>();
         datosUsuario.put("Articulos",Articulo);
         datosUsuario.put("Descripcion",Descripcion);
         datosUsuario.put("Precio",Precio);
         datosUsuario.put("Imagen",Foto);
+        datosUsuario.put("ID",n);
         mRootReference.child("Articulos").push().setValue(datosUsuario);
     }
     //::::::::::::::::::::::: Metodo para Subir la imagen ::::::::::::::::::::::::::::::::::::
@@ -116,5 +121,10 @@ public class AdministracionUsuario extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void Cambiando(View view) {
+        Intent intent = new Intent(this,Sacandoarticulos.class);
+        startActivity(intent);
     }
 }
