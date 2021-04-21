@@ -6,14 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -21,7 +26,7 @@ import com.google.firebase.storage.UploadTask;
 public class subir_imagen extends AppCompatActivity {
     private Button mButton, boton;
     private StorageReference mStorage;
-    private ImageButton botonimagen,Imagen2;
+    private ImageButton botonimagen;
     private LinearLayout layout,contenedorBoton;
     private static final int GALLERY_INTENT =1;//creamos un codigo
     @Override
@@ -30,8 +35,7 @@ public class subir_imagen extends AppCompatActivity {
         setContentView(R.layout.activity_subir_imagen);
         layout      =   (LinearLayout)findViewById(R.id.llBotonera);
         mButton     =   (Button)findViewById(R.id.botonSubir);
-        Imagen2     =   (ImageButton)findViewById(R.id.imageButton2);
-        botonimagen =   (ImageButton)findViewById(R.id.imageButton2);
+        botonimagen =   (ImageButton)findViewById(R.id.imageButton);
         referencenciaStoreFirebase();
     }
 
@@ -83,8 +87,8 @@ public class subir_imagen extends AppCompatActivity {
                                 Glide.with(subir_imagen.this)
                                         .load(downloadUrl).fitCenter().centerCrop().into(botonimagen);
                             }
-                            Glide.with(subir_imagen.this)
-                                    .load(downloadUrl).fitCenter().centerCrop().into(Imagen2);
+                            /*Glide.with(subir_imagen.this)
+                                    .load(downloadUrl).fitCenter().centerCrop().into(botonimagen);*/
                             Toast.makeText(subir_imagen.this,"Se subio la foto man",Toast.LENGTH_SHORT).show();
                         }
                     });
